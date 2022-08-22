@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'be.shark_zekrom'
-version '1.0-SNAPSHOT'
+version ''
 
 repositories {
     mavenLocal()
