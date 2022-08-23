@@ -15,8 +15,8 @@ public class Commands implements CommandExecutor {
         if (args.length == 2) {
 
             if (args[0].equalsIgnoreCase("give")) {
-                if (args[1].equalsIgnoreCase("test")) {
-                    player.sendMessage("test");
+                if (args[1].equalsIgnoreCase("Punchingball")) {
+                    Utils.givePunchingball(player);
                 }
             }
         }
