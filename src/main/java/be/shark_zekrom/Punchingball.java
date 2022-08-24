@@ -98,7 +98,7 @@ public class Punchingball {
         new BukkitRunnable() {
             @Override
             public void run() {
-                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() + Math.toRadians(3)));
+                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() - Math.toRadians(3)));
 
             }
         }.runTaskLater(Main.getInstance(),0L);
@@ -106,14 +106,14 @@ public class Punchingball {
         new BukkitRunnable() {
             @Override
             public void run() {
-                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() + Math.toRadians(3)));
+                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() - Math.toRadians(3)));
 
             }
         }.runTaskLater(Main.getInstance(),1L);
         new BukkitRunnable() {
             @Override
             public void run() {
-                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() - Math.toRadians(3)));
+                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() + Math.toRadians(3)));
 
             }
         }.runTaskLater(Main.getInstance(),2L);
@@ -121,7 +121,7 @@ public class Punchingball {
         new BukkitRunnable() {
             @Override
             public void run() {
-                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() - Math.toRadians(3)));
+                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() + Math.toRadians(3)));
 
             }
         }.runTaskLater(Main.getInstance(),3L);
@@ -129,7 +129,7 @@ public class Punchingball {
         new BukkitRunnable() {
             @Override
             public void run() {
-                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() + Math.toRadians(3)));
+                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() - Math.toRadians(3)));
 
             }
         }.runTaskLater(Main.getInstance(),4L);
@@ -137,7 +137,7 @@ public class Punchingball {
         new BukkitRunnable() {
             @Override
             public void run() {
-                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() + Math.toRadians(3)));
+                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() - Math.toRadians(3)));
 
             }
         }.runTaskLater(Main.getInstance(),5L);
@@ -146,7 +146,7 @@ public class Punchingball {
         new BukkitRunnable() {
             @Override
             public void run() {
-                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() - Math.toRadians(3)));
+                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() + Math.toRadians(3)));
 
             }
         }.runTaskLater(Main.getInstance(),6L);
@@ -154,7 +154,7 @@ public class Punchingball {
         new BukkitRunnable() {
             @Override
             public void run() {
-                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() - Math.toRadians(3)));
+                armorStand.setHeadPose(armorStand.getHeadPose().setX(armorStand.getHeadPose().getX() + Math.toRadians(3)));
 
             }
         }.runTaskLater(Main.getInstance(),7L);
