@@ -14,7 +14,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
+
+import static java.lang.String.format;
 
 public class Listeners implements Listener {
 
@@ -59,7 +62,11 @@ public class Listeners implements Listener {
             if (armorStand.getScoreboardTags().contains("Punchingball")) {
                 event.setCancelled(true);
                 Utils.animationPunchingball(armorStand);
-                armorStand.setCustomName(event.getDamage() + "");
+
+                double number = event.getDamage();
+                DecimalFormat format = new DecimalFormat("0.00");
+
+                armorStand.setCustomName("-" + format.format(number) + "");
                 armorStand.setCustomNameVisible(true);
                 if (punchingballhit.containsKey(player)) {
                     punchingballhit.put(player, punchingballhit.get(player) + 3);
