@@ -1,5 +1,7 @@
 package be.shark_zekrom;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.line.HologramLine;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -158,5 +160,13 @@ public class Punchingball {
 
             }
         }.runTaskLater(Main.getInstance(),7L);
+    }
+
+
+    public static void spawnHologram(Location location) {
+        Main plugin = Main.getInstance();
+        HolographicDisplaysAPI  api = HolographicDisplaysAPI.get(plugin); // The API instance for your plugin
+        Hologram hologram = new Hol
+        HologramLine textLine = hologram.appendTextLine("A hologram line");
     }
 }

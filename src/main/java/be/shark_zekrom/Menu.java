@@ -73,34 +73,41 @@ public class Menu implements Listener {
         if (event.getView().getTitle().equalsIgnoreCase("Punchingball")) {
             event.setCancelled(true);
 
-            if (slot == 0) {
-                player.closeInventory();
-                Punchingball.startPunchingball(player, playerPunchingball.get(player), 15);
-            }
-            if (slot == 1) {
-                player.closeInventory();
-                Punchingball.startPunchingball(player, playerPunchingball.get(player), 30);
-            }
-            if (slot == 2) {
-                player.closeInventory();
-                Punchingball.startPunchingball(player, playerPunchingball.get(player), 60);
-            }
-            if (slot == 3) {
-                player.closeInventory();
-                Punchingball.startPunchingball(player, playerPunchingball.get(player), 90);
-            }
-            if (slot == 4) {
-                player.closeInventory();
-                Punchingball.startPunchingball(player, playerPunchingball.get(player), 120);
-            }
+            if (Punchingball.punchingball.containsKey(player)) {
+                player.sendMessage("you are in battle");
 
-            if (slot == 49) {
-                player.closeInventory();
-                playerPunchingball.get(player).remove();
-                armorstandPunchingball.remove(playerPunchingball.get(player));
-                playerPunchingball.remove(player);
-            }
 
+            } else {
+
+                if (slot == 0) {
+                    player.closeInventory();
+                    Punchingball.startPunchingball(player, playerPunchingball.get(player), 15);
+                }
+                if (slot == 1) {
+                    player.closeInventory();
+                    Punchingball.startPunchingball(player, playerPunchingball.get(player), 30);
+                }
+                if (slot == 2) {
+                    player.closeInventory();
+                    Punchingball.startPunchingball(player, playerPunchingball.get(player), 60);
+                }
+                if (slot == 3) {
+                    player.closeInventory();
+                    Punchingball.startPunchingball(player, playerPunchingball.get(player), 90);
+                }
+                if (slot == 4) {
+                    player.closeInventory();
+                    Punchingball.startPunchingball(player, playerPunchingball.get(player), 120);
+                }
+
+                if (slot == 49) {
+                    player.closeInventory();
+                    playerPunchingball.get(player).remove();
+                    armorstandPunchingball.remove(playerPunchingball.get(player));
+                    playerPunchingball.remove(player);
+                }
+
+            }
         }
     }
 
