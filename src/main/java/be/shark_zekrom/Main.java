@@ -17,6 +17,7 @@ public class Main extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new Listeners(), this);
+        pm.registerEvents(new Menu(), this);
 
         this.getCommand("BattleTraining+").setExecutor(new Commands());
 
