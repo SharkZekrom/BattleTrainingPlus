@@ -21,7 +21,6 @@ import static java.lang.String.format;
 
 public class Listeners implements Listener {
 
-    public static HashMap<Player, Integer> punchingballhit = new HashMap<>();
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent event) {
@@ -34,7 +33,7 @@ public class Listeners implements Listener {
                     if (mainHand.getItemMeta().hasDisplayName()) {
                         if (mainHand.getItemMeta().getDisplayName().equals("BattleTrainingPlus")) {
                             event.setCancelled(true);
-                            Utils.spawnPunchingball(event.getPlayer(), event.getClickedBlock().getLocation().add(0.5,1,0.5));
+                            Punchingball.spawnPunchingball(event.getPlayer(), event.getClickedBlock().getLocation().add(0.5,1,0.5));
                         }
                     }
 
@@ -61,40 +60,59 @@ public class Listeners implements Listener {
         if (event.getEntity() instanceof ArmorStand armorStand && event.getDamager() instanceof Player player) {
             if (armorStand.getScoreboardTags().contains("Punchingball")) {
                 event.setCancelled(true);
-                Utils.animationPunchingball(armorStand);
+                Punchingball.animationPunchingball(armorStand);
 
-                double number = event.getDamage();
-                DecimalFormat format = new DecimalFormat("0.00");
+                if (Punchingball.punchingball.containsKey(player)) {
+                    Punchingball.totalDamage.put(player,  Punchingball.totalDamage.get(player) + event.getDamage());
+                    Punchingball.lastDamage.put(player, event.getDamage());
+                    Punchingball.hits.put(player,  Punchingball.hits.get(player) + 1);
 
-                armorStand.setCustomName("-" + format.format(number) + "");
-                armorStand.setCustomNameVisible(true);
-                if (punchingballhit.containsKey(player)) {
-                    punchingballhit.put(player, punchingballhit.get(player) + 3);
+                    if (event.getDamage() > Punchingball.maxDamage.get(player)) {
+                        Punchingball.maxDamage.put(player, event.getDamage());
+                    }
+
+                    if (Punchingball.minDamage.get(player) == null) {
+                        Punchingball.minDamage.put(player, event.getDamage());
+                    } else {
+                        if (event.getDamage() < Punchingball.minDamage.get(player)) {
+                            Punchingball.minDamage.put(player, event.getDamage());
+                        }
+                    }
+
                 } else {
-                    punchingballhit.put(player, 3);
 
-                }
-                final int[] countdown = {3};
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        countdown[0]--;
+                    double number = event.getDamage();
+                    DecimalFormat format = new DecimalFormat("0.00");
 
-                        punchingballhit.put(player ,punchingballhit.get(player) - 1);
-
-                        if (punchingballhit.get(player) == 0) {
-                            armorStand.setCustomNameVisible(false);
-
-                        }
-
-                        if (countdown[0] == 0) {
-                            cancel();
-                        }
-
-
+                    armorStand.setCustomName("-" + format.format(number) + "");
+                    armorStand.setCustomNameVisible(true);
+                    if (Punchingball.punchingballhit.containsKey(player)) {
+                        Punchingball.punchingballhit.put(player, Punchingball.punchingballhit.get(player) + 3);
+                    } else {
+                        Punchingball.punchingballhit.put(player, 3);
 
                     }
-                }.runTaskTimer(Main.getInstance(),0L,20L);
+                    final int[] countdown = {3};
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            countdown[0]--;
+
+                            Punchingball.punchingballhit.put(player, Punchingball.punchingballhit.get(player) - 1);
+
+                            if (Punchingball.punchingballhit.get(player) == 0) {
+                                armorStand.setCustomNameVisible(false);
+
+                            }
+
+                            if (countdown[0] == 0) {
+                                cancel();
+                            }
+
+
+                        }
+                    }.runTaskTimer(Main.getInstance(), 0L, 20L);
+                }
             }
         }
     }

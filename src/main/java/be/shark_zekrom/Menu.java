@@ -7,9 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
 
@@ -28,6 +28,12 @@ public class Menu implements Listener {
         ItemStack itemStack = new ItemStack(Material.BARRIER);
         inventory.setItem(49, itemStack);
 
+        ItemStack clock = new ItemStack(Material.CLOCK);
+        ItemMeta clockMeta = clock.getItemMeta();
+        clockMeta.setDisplayName("15 secondes");
+        clock.setItemMeta(clockMeta);
+        inventory.setItem(0, clock);
+
         playerPunchingball.put(player, armorStand);
         armorstandPunchingball.put(armorStand, player);
 
@@ -41,6 +47,11 @@ public class Menu implements Listener {
 
         if (event.getView().getTitle().equalsIgnoreCase("Punchingball")) {
             event.setCancelled(true);
+
+            if (slot == 0) {
+                Punchingball.startPunchingball(player, playerPunchingball.get(player), 15);
+            }
+
             if (slot == 49) {
                 player.closeInventory();
                 playerPunchingball.get(player).remove();
