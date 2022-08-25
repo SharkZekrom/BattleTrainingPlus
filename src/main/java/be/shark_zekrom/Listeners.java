@@ -53,7 +53,13 @@ public class Listeners implements Listener {
                     Menu.punchingballEditing(event.getPlayer(), armorStand);
 
                 } else {
-                    Menu.punchingball(event.getPlayer(), armorStand);
+                    if (Punchingball.punchingball.containsKey(event.getPlayer())) {
+
+                        event.getPlayer().sendMessage("you are in battle");
+                    } else {
+                        Menu.punchingball(event.getPlayer(), armorStand);
+
+                    }
                 }
             }
 
@@ -92,7 +98,7 @@ public class Listeners implements Listener {
                     double number = event.getDamage();
                     DecimalFormat format = new DecimalFormat("0.00");
 
-                    armorStand.setCustomName("-" + format.format(number) + "");
+                    armorStand.setCustomName("§e-" + format.format(number) + "");
                     armorStand.setCustomNameVisible(true);
                     if (Punchingball.punchingballhit.containsKey(armorStand)) {
                         Punchingball.punchingballhit.put(armorStand, Punchingball.punchingballhit.get(armorStand) + 3);

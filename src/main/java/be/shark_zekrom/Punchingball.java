@@ -3,6 +3,8 @@ package be.shark_zekrom;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.line.HologramLine;
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -10,6 +12,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.text.DecimalFormat;
@@ -50,7 +53,29 @@ public class Punchingball {
         armorStand.setGravity(false);
         armorStand.addScoreboardTag("Punchingball");
 
-        armorStand.setHelmet(new ItemStack(Material.STONE));
+        armorStand.setHelmet(new ItemStack(Material.HAY_BLOCK));
+
+        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+        ItemMeta chestplateMeta = chestplate.hasItemMeta() ? chestplate.getItemMeta() : Bukkit.getItemFactory().getItemMeta(chestplate.getType());
+        LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) chestplateMeta;
+        leatherArmorMeta.setColor(Color.fromRGB(254, 216, 61));
+        chestplate.setItemMeta(leatherArmorMeta);
+        armorStand.setChestplate(chestplate);
+
+        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
+        ItemMeta leggingsMeta = leggings.hasItemMeta() ? leggings.getItemMeta() : Bukkit.getItemFactory().getItemMeta(leggings.getType());
+        LeatherArmorMeta leggingsArmorMeta = (LeatherArmorMeta) leggingsMeta;
+        leggingsArmorMeta.setColor(Color.fromRGB(254, 216, 61));
+        leggings.setItemMeta(leggingsArmorMeta);
+        armorStand.setLeggings(leggings);
+
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        ItemMeta bootsMeta = boots.hasItemMeta() ? boots.getItemMeta() : Bukkit.getItemFactory().getItemMeta(boots.getType());
+        LeatherArmorMeta bootsArmorMeta = (LeatherArmorMeta) bootsMeta;
+        bootsArmorMeta.setColor(Color.fromRGB(254, 216, 61));
+        boots.setItemMeta(bootsArmorMeta);
+        armorStand.setBoots(boots);
+
 
     }
 
@@ -77,10 +102,10 @@ public class Punchingball {
                     cancel();
                     armorStand.setCustomNameVisible(false);
 
-
                     player.sendMessage("Total time : " + time);
                     player.sendMessage("Total damage : " + format.format(totalDamage.get(player)));
                     player.sendMessage("Max damage : " + format.format(maxDamage.get(player)));
+                    minDamage.putIfAbsent(player, 0.0);
                     player.sendMessage("Min damage : " + format.format(minDamage.get(player)));
                     player.sendMessage("Damage per seconds : " + format.format((totalDamage.get(player)) / time));
                     player.sendMessage("Average damage : " + format.format(totalDamage.get(player) / (double) hits.get(player)));

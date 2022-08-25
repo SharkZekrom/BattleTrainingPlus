@@ -44,6 +44,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         Bukkit.getLogger().info("BattleTraining+ disabled !");
-        Punchingball.hologram.delete();
+        //Punchingball.hologram.delete();
     }
 }
