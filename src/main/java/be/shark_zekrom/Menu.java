@@ -32,31 +32,31 @@ public class Menu implements Listener {
 
         ItemStack clock15 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta15 = clock15.getItemMeta();
-        clockMeta15.setDisplayName("15 seconds");
+        clockMeta15.setDisplayName(Main.getInstance().getConfig().getString("Punchingball15seconds"));
         clock15.setItemMeta(clockMeta15);
         inventory.setItem(21, clock15);
 
         ItemStack clock30 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta30 = clock30.getItemMeta();
-        clockMeta30.setDisplayName("30 seconds");
+        clockMeta30.setDisplayName(Main.getInstance().getConfig().getString("Punchingball30seconds"));
         clock30.setItemMeta(clockMeta30);
         inventory.setItem(22, clock30);
 
         ItemStack clock60 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta60 = clock60.getItemMeta();
-        clockMeta60.setDisplayName("60 seconds");
+        clockMeta60.setDisplayName(Main.getInstance().getConfig().getString("Punchingball60seconds"));
         clock60.setItemMeta(clockMeta60);
         inventory.setItem(23, clock60);
 
         ItemStack clock90 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta90 = clock90.getItemMeta();
-        clockMeta90.setDisplayName("90 seconds");
+        clockMeta90.setDisplayName(Main.getInstance().getConfig().getString("Punchingball90seconds"));
         clock90.setItemMeta(clockMeta90);
         inventory.setItem(24, clock90);
 
         ItemStack clock120 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta120 = clock120.getItemMeta();
-        clockMeta120.setDisplayName("120 seconds");
+        clockMeta120.setDisplayName(Main.getInstance().getConfig().getString("Punchingball120seconds"));
         clock120.setItemMeta(clockMeta120);
         inventory.setItem(25, clock120);
 

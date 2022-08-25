@@ -41,6 +41,11 @@ public class Main extends JavaPlugin {
 
         config.addDefault("EditingMenu", "Punching ball editing");
         config.addDefault("PunchingballMenu", "Punching ball");
+        config.addDefault("Punchingball15seconds", "15 seconds");
+        config.addDefault("Punchingball30seconds", "30 seconds");
+        config.addDefault("Punchingball60seconds", "60 seconds");
+        config.addDefault("Punchingball90seconds", "90 seconds");
+        config.addDefault("Punchingball120seconds", "120 seconds");
 
         config.options().copyDefaults(true);
         saveConfig();
