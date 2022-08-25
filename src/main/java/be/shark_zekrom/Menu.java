@@ -107,6 +107,7 @@ public class Menu implements Listener {
 
                 if (slot == 49) {
                     player.closeInventory();
+                    playerPunchingball.get(player).getLocation().getBlock().setType(Material.AIR);
                     playerPunchingball.get(player).remove();
                     armorstandPunchingball.remove(playerPunchingball.get(player));
                     playerPunchingball.remove(player);

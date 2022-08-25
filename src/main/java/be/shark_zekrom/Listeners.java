@@ -35,7 +35,7 @@ public class Listeners implements Listener {
                     if (mainHand.getItemMeta().hasDisplayName()) {
                         if (mainHand.getItemMeta().getDisplayName().equals("BattleTrainingPlus")) {
                             event.setCancelled(true);
-                            Punchingball.spawnPunchingball(event.getClickedBlock().getLocation().add(0.5,1,0.5));
+                            Punchingball.spawnPunchingball(event.getPlayer(), event.getClickedBlock().getLocation().add(0.5,1,0.5));
                         }
                     }
 

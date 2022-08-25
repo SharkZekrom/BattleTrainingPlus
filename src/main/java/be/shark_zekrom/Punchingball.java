@@ -45,12 +45,15 @@ public class Punchingball {
         player.getInventory().addItem(itemStack);
     }
 
-    public static void spawnPunchingball(Location location) {
+    public static void spawnPunchingball(Player player,Location location) {
+        location.getBlock().setType(Material.OAK_FENCE);
 
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setCanPickupItems(false);
         armorStand.setGravity(false);
+        armorStand.setVisible(false);
         armorStand.addScoreboardTag("Punching ball");
+
 
         armorStand.setHelmet(new ItemStack(Material.HAY_BLOCK));
 
@@ -60,20 +63,6 @@ public class Punchingball {
         leatherArmorMeta.setColor(Color.fromRGB(254, 216, 61));
         chestplate.setItemMeta(leatherArmorMeta);
         armorStand.setChestplate(chestplate);
-
-        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
-        ItemMeta leggingsMeta = leggings.hasItemMeta() ? leggings.getItemMeta() : Bukkit.getItemFactory().getItemMeta(leggings.getType());
-        LeatherArmorMeta leggingsArmorMeta = (LeatherArmorMeta) leggingsMeta;
-        leggingsArmorMeta.setColor(Color.fromRGB(254, 216, 61));
-        leggings.setItemMeta(leggingsArmorMeta);
-        armorStand.setLeggings(leggings);
-
-        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        ItemMeta bootsMeta = boots.hasItemMeta() ? boots.getItemMeta() : Bukkit.getItemFactory().getItemMeta(boots.getType());
-        LeatherArmorMeta bootsArmorMeta = (LeatherArmorMeta) bootsMeta;
-        bootsArmorMeta.setColor(Color.fromRGB(254, 216, 61));
-        boots.setItemMeta(bootsArmorMeta);
-        armorStand.setBoots(boots);
 
 
     }
