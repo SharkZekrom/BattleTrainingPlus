@@ -47,13 +47,24 @@ public class Punchingball {
 
     public static void spawnPunchingball(Player player,Location location) {
         location.getBlock().setType(Material.OAK_FENCE);
+        if (Utils.getDirection(player).equals("N") || Utils.getDirection(player).equals("NE")) {
+            location.setYaw(270);
+        } else if (Utils.getDirection(player).equals("E") || Utils.getDirection(player).equals("SE")) {
+            location.setYaw(0);
+
+        } else if (Utils.getDirection(player).equals("S") || Utils.getDirection(player).equals("SW")) {
+            location.setYaw(90);
+
+        } else if (Utils.getDirection(player).equals("W") || Utils.getDirection(player).equals("NW")) {
+            location.setYaw(180);
+
+        }
 
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setCanPickupItems(false);
         armorStand.setGravity(false);
         armorStand.setVisible(false);
         armorStand.addScoreboardTag("Punching ball");
-
 
         armorStand.setHelmet(new ItemStack(Material.HAY_BLOCK));
 
