@@ -48,7 +48,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onRightClickEntity(PlayerInteractAtEntityEvent event) {
         if (event.getRightClicked() instanceof ArmorStand armorStand) {
-            if (armorStand.getScoreboardTags().contains("Punchingball")) {
+            if (armorStand.getScoreboardTags().contains("Punching ball")) {
                 if (event.getPlayer().isSneaking()) {
                     Menu.punchingballEditing(event.getPlayer(), armorStand);
 
@@ -71,7 +71,7 @@ public class Listeners implements Listener {
     public void entityDeathEvent(EntityDamageByEntityEvent event) {
 
         if (event.getEntity() instanceof ArmorStand armorStand && event.getDamager() instanceof Player player) {
-            if (armorStand.getScoreboardTags().contains("Punchingball")) {
+            if (armorStand.getScoreboardTags().contains("Punching ball")) {
                 event.setCancelled(true);
                 Punchingball.animationPunchingball(armorStand);
 
@@ -131,7 +131,7 @@ public class Listeners implements Listener {
     public void playerArmorStandManipulateEvent(PlayerArmorStandManipulateEvent event) {
 
         ArmorStand armorStand = event.getRightClicked();
-        if (armorStand.getScoreboardTags().contains("Punchingball")) {
+        if (armorStand.getScoreboardTags().contains("Punching ball")) {
             event.setCancelled(true);
         }
     }

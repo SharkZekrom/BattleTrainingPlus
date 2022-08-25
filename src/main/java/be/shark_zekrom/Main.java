@@ -4,6 +4,7 @@ import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,6 +36,14 @@ public class Main extends JavaPlugin {
 
         this.getCommand("BattleTraining+").setExecutor(new Commands());
 
+
+        FileConfiguration config = getConfig();
+
+        config.addDefault("EditingMenu", "Punching ball editing");
+        config.addDefault("PunchingballMenu", "Punching ball");
+
+        config.options().copyDefaults(true);
+        saveConfig();
 
 
         Bukkit.getLogger().info("BattleTraining+ enabled !");

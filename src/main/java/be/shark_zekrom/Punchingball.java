@@ -39,7 +39,7 @@ public class Punchingball {
 
         ItemStack itemStack = new ItemStack(Material.ARMOR_STAND);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName("Punchingball");
+        itemMeta.setDisplayName("Punching ball");
         itemStack.setItemMeta(itemMeta);
 
         player.getInventory().addItem(itemStack);
@@ -48,10 +48,10 @@ public class Punchingball {
     public static void spawnPunchingball(Location location) {
 
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
-        armorStand.setCustomName("Punchingball");
+        armorStand.setCustomName("Punching ball");
         armorStand.setCanPickupItems(false);
         armorStand.setGravity(false);
-        armorStand.addScoreboardTag("Punchingball");
+        armorStand.addScoreboardTag("Punching ball");
 
         armorStand.setHelmet(new ItemStack(Material.HAY_BLOCK));
 
@@ -81,7 +81,6 @@ public class Punchingball {
 
     public static void startPunchingball(Player player,ArmorStand armorStand , Integer time) {
 
-        player.sendMessage("start");
         punchingball.put(player,armorStand);
         totalDamage.put(player,0.0);
         lastDamage.put(player, 0.0);
@@ -195,7 +194,7 @@ public class Punchingball {
         hologram.clearLines();
         hologram.appendTextLine("§bLeaderboard §7| §eDamage per seconds");
         hologram.appendTextLine("");
-        hologram.appendTextLine("§6Total Time §7| §e15 secondes ");
+        hologram.appendTextLine("§6Total Time §7| §e15 seconds ");
         hologram.appendTextLine("");
         hologram.appendTextLine("§c#1 §7|");
         hologram.appendTextLine("§c#2 §7|");
@@ -208,7 +207,7 @@ public class Punchingball {
                 hologram.clearLines();
                 hologram.appendTextLine("§bLeaderboard §7| §eDamage per seconds");
                 hologram.appendTextLine("");
-                hologram.appendTextLine("§6Total Time §7| §e30 secondes ");
+                hologram.appendTextLine("§6Total Time §7| §e30 seconds ");
                 hologram.appendTextLine("");
                 hologram.appendTextLine("§c#1 §7|");
                 hologram.appendTextLine("§c#2 §7|");

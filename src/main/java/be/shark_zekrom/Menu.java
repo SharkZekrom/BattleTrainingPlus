@@ -24,7 +24,7 @@ public class Menu implements Listener {
 
     public static void punchingball(Player player, ArmorStand armorStand) {
 
-        Inventory inventory = Bukkit.createInventory(null, 54, "Punchingball");
+        Inventory inventory = Bukkit.createInventory(null, 54, "Punching ball");
 
         player.openInventory(inventory);
         Utils.border(inventory);
@@ -32,31 +32,31 @@ public class Menu implements Listener {
 
         ItemStack clock15 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta15 = clock15.getItemMeta();
-        clockMeta15.setDisplayName("15 secondes");
+        clockMeta15.setDisplayName("15 seconds");
         clock15.setItemMeta(clockMeta15);
         inventory.setItem(21, clock15);
 
         ItemStack clock30 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta30 = clock30.getItemMeta();
-        clockMeta30.setDisplayName("30 secondes");
+        clockMeta30.setDisplayName("30 seconds");
         clock30.setItemMeta(clockMeta30);
         inventory.setItem(22, clock30);
 
         ItemStack clock60 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta60 = clock60.getItemMeta();
-        clockMeta60.setDisplayName("60 secondes");
+        clockMeta60.setDisplayName("60 seconds");
         clock60.setItemMeta(clockMeta60);
         inventory.setItem(23, clock60);
 
         ItemStack clock90 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta90 = clock90.getItemMeta();
-        clockMeta90.setDisplayName("90 secondes");
+        clockMeta90.setDisplayName("90 seconds");
         clock90.setItemMeta(clockMeta90);
         inventory.setItem(24, clock90);
 
         ItemStack clock120 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta120 = clock120.getItemMeta();
-        clockMeta120.setDisplayName("120 secondes");
+        clockMeta120.setDisplayName("120 seconds");
         clock120.setItemMeta(clockMeta120);
         inventory.setItem(25, clock120);
 
@@ -71,7 +71,7 @@ public class Menu implements Listener {
     }
 
     public static void punchingballEditing(Player player, ArmorStand armorStand) {
-        Inventory inventory = Bukkit.createInventory(null, 54, "Punchingball Editing");
+        Inventory inventory = Bukkit.createInventory(null, 54, "Punching ball Editing");
 
         player.openInventory(inventory);
         Utils.border(inventory);
@@ -98,7 +98,7 @@ public class Menu implements Listener {
         Player player = (Player) event.getWhoClicked();
 
         int slot = event.getSlot();
-        if (event.getView().getTitle().equalsIgnoreCase("Punchingball Editing")) {
+        if (event.getView().getTitle().equalsIgnoreCase("Punching ball Editing")) {
             if (event.getClickedInventory().getType() != InventoryType.PLAYER) {
 
                 if (!(slot == 13 || slot == 22 || slot == 31 || slot == 40)) {
@@ -113,7 +113,7 @@ public class Menu implements Listener {
                 }
             }
         }
-        if (event.getView().getTitle().equalsIgnoreCase("Punchingball")) {
+        if (event.getView().getTitle().equalsIgnoreCase("Punching ball")) {
             if (event.getClickedInventory().getType() != InventoryType.PLAYER) {
 
                 event.setCancelled(true);
@@ -147,7 +147,7 @@ public class Menu implements Listener {
     private void onInventoryClose(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
 
-        if (event.getView().getTitle().equalsIgnoreCase("Punchingball Editing")) {
+        if (event.getView().getTitle().equalsIgnoreCase("Punching ball Editing")) {
 
             ArmorStand armorStand = playereditarmorstand.get(player);
 
