@@ -48,7 +48,6 @@ public class Punchingball {
     public static void spawnPunchingball(Location location) {
 
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
-        armorStand.setCustomName("Punching ball");
         armorStand.setCanPickupItems(false);
         armorStand.setGravity(false);
         armorStand.addScoreboardTag("Punching ball");
@@ -101,14 +100,14 @@ public class Punchingball {
                     cancel();
                     armorStand.setCustomNameVisible(false);
 
-                    player.sendMessage("Total time : " + time);
-                    player.sendMessage("Total damage : " + format.format(totalDamage.get(player)));
-                    player.sendMessage("Max damage : " + format.format(maxDamage.get(player)));
+                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatTotalTime").replace("{TotalTime}", String.valueOf(time)));
+                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatTotalDamage").replace("{TotalDamage}", format.format(totalDamage.get(player))));
+                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatMaxDamage").replace("{MaxDamage}", format.format(maxDamage.get(player))));
                     minDamage.putIfAbsent(player, 0.0);
-                    player.sendMessage("Min damage : " + format.format(minDamage.get(player)));
-                    player.sendMessage("Damage per seconds : " + format.format((totalDamage.get(player)) / time));
-                    player.sendMessage("Average damage : " + format.format(totalDamage.get(player) / (double) hits.get(player)));
-                    player.sendMessage("Hits : " + hits.get(player));
+                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatMinDamage").replace("{MinDamage}", format.format(minDamage.get(player))));
+                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatDamagePerSeconds").replace("{DamagePerSeconds}", format.format((totalDamage.get(player)) / time)));
+                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatAverageDamage").replace("{AverageDamage}", format.format(totalDamage.get(player) / (double) hits.get(player))));
+                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatHits").replace("{Hits}", String.valueOf(hits.get(player))));
 
                     punchingball.remove(player);
                 }

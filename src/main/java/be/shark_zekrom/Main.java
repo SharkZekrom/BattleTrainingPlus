@@ -39,13 +39,21 @@ public class Main extends JavaPlugin {
 
         FileConfiguration config = getConfig();
 
-        config.addDefault("EditingMenu", "Punching ball editing");
+        config.addDefault("PunchingballEditingMenu", "Punching ball editing");
         config.addDefault("PunchingballMenu", "Punching ball");
         config.addDefault("Punchingball15seconds", "15 seconds");
         config.addDefault("Punchingball30seconds", "30 seconds");
         config.addDefault("Punchingball60seconds", "60 seconds");
         config.addDefault("Punchingball90seconds", "90 seconds");
         config.addDefault("Punchingball120seconds", "120 seconds");
+        config.addDefault("PunchingballRemove", "&cRemove");
+        config.addDefault("PunchingballChatTotalTime", "§eTotal time > {TotalTime}");
+        config.addDefault("PunchingballChatTotalDamage", "§eTotal damage > {TotalDamage}");
+        config.addDefault("PunchingballChatMaxDamage", "§eMax damage > {MaxDamage}");
+        config.addDefault("PunchingballChatMinDamage", "§eMin damage > {MinDamage}");
+        config.addDefault("PunchingballChatDamagePerSeconds", "§eDamage per seconds > {DamagePerSeconds}");
+        config.addDefault("PunchingballChatAverageDamage", "§eAverage damage > {AverageDamage}");
+        config.addDefault("PunchingballChatHits", "§eHits > {Hits}");
 
         config.options().copyDefaults(true);
         saveConfig();

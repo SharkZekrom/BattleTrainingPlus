@@ -53,10 +53,7 @@ public class Listeners implements Listener {
                     Menu.punchingballEditing(event.getPlayer(), armorStand);
 
                 } else {
-                    if (Punchingball.punchingball.containsKey(event.getPlayer())) {
-
-                        event.getPlayer().sendMessage("you are in battle");
-                    } else {
+                    if (!Punchingball.punchingball.containsKey(event.getPlayer())) {
                         Menu.punchingball(event.getPlayer(), armorStand);
 
                     }

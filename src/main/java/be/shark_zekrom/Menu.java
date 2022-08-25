@@ -24,7 +24,7 @@ public class Menu implements Listener {
 
     public static void punchingball(Player player, ArmorStand armorStand) {
 
-        Inventory inventory = Bukkit.createInventory(null, 54, "Punching ball");
+        Inventory inventory = Bukkit.createInventory(null, 54, Main.getInstance().getConfig().getString("PunchingballMenu"));
 
         player.openInventory(inventory);
         Utils.border(inventory);
@@ -71,7 +71,7 @@ public class Menu implements Listener {
     }
 
     public static void punchingballEditing(Player player, ArmorStand armorStand) {
-        Inventory inventory = Bukkit.createInventory(null, 54, "Punching ball Editing");
+        Inventory inventory = Bukkit.createInventory(null, 54, Main.getInstance().getConfig().getString("PunchingballEditingMenu"));
 
         player.openInventory(inventory);
         Utils.border(inventory);
@@ -83,7 +83,7 @@ public class Menu implements Listener {
 
         ItemStack itemStack = new ItemStack(Material.BARRIER);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName("Remove");
+        itemMeta.setDisplayName(Main.getInstance().getConfig().getString("PunchingballRemove"));
         itemStack.setItemMeta(itemMeta);
         inventory.setItem(49, itemStack);
 
@@ -98,7 +98,7 @@ public class Menu implements Listener {
         Player player = (Player) event.getWhoClicked();
 
         int slot = event.getSlot();
-        if (event.getView().getTitle().equalsIgnoreCase("Punching ball Editing")) {
+        if (event.getView().getTitle().equalsIgnoreCase(Main.getInstance().getConfig().getString("PunchingballEditingMenu"))) {
             if (event.getClickedInventory().getType() != InventoryType.PLAYER) {
 
                 if (!(slot == 13 || slot == 22 || slot == 31 || slot == 40)) {
@@ -113,7 +113,7 @@ public class Menu implements Listener {
                 }
             }
         }
-        if (event.getView().getTitle().equalsIgnoreCase("Punching ball")) {
+        if (event.getView().getTitle().equalsIgnoreCase(Main.getInstance().getConfig().getString("PunchingballMenu"))) {
             if (event.getClickedInventory().getType() != InventoryType.PLAYER) {
 
                 event.setCancelled(true);
@@ -147,7 +147,7 @@ public class Menu implements Listener {
     private void onInventoryClose(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
 
-        if (event.getView().getTitle().equalsIgnoreCase("Punching ball Editing")) {
+        if (event.getView().getTitle().equalsIgnoreCase(Main.getInstance().getConfig().getString("PunchingballEditingMenu"))) {
 
             ArmorStand armorStand = playereditarmorstand.get(player);
 
