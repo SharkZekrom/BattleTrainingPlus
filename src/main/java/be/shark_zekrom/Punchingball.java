@@ -1,6 +1,7 @@
 package be.shark_zekrom;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.line.HologramLine;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,7 +24,9 @@ public class Punchingball {
     public static HashMap<Player, Double> minDamage = new HashMap<>();
     public static HashMap<Player, Integer> hits = new HashMap<>();
 
-    public static HashMap<Player, Integer> punchingballhit = new HashMap<>();
+    public static HashMap<ArmorStand, Integer> punchingballhit = new HashMap<>();
+
+    public static Hologram hologram;
 
 
 
@@ -39,7 +42,7 @@ public class Punchingball {
         player.getInventory().addItem(itemStack);
     }
 
-    public static void spawnPunchingball(Player player, Location location) {
+    public static void spawnPunchingball(Location location) {
 
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setCustomName("Punchingball");
@@ -163,10 +166,43 @@ public class Punchingball {
     }
 
 
-    public static void spawnHologram(Location location) {
-        Main plugin = Main.getInstance();
-        HolographicDisplaysAPI  api = HolographicDisplaysAPI.get(plugin); // The API instance for your plugin
-        Hologram hologram = new Hol
-        HologramLine textLine = hologram.appendTextLine("A hologram line");
+    public static void spawnHologram() {
+        hologram.clearLines();
+        hologram.appendTextLine("§bLeaderboard §7| §eDamage per seconds");
+        hologram.appendTextLine("");
+        hologram.appendTextLine("§6Total Time §7| §e15 secondes ");
+        hologram.appendTextLine("");
+        hologram.appendTextLine("§c#1 §7|");
+        hologram.appendTextLine("§c#2 §7|");
+        hologram.appendTextLine("§c#3 §7|");
+        hologram.appendTextLine("§c#4 §7|");
+        hologram.appendTextLine("§c#5 §7|");
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                hologram.clearLines();
+                hologram.appendTextLine("§bLeaderboard §7| §eDamage per seconds");
+                hologram.appendTextLine("");
+                hologram.appendTextLine("§6Total Time §7| §e30 secondes ");
+                hologram.appendTextLine("");
+                hologram.appendTextLine("§c#1 §7|");
+                hologram.appendTextLine("§c#2 §7|");
+                hologram.appendTextLine("§c#3 §7|");
+                hologram.appendTextLine("§c#4 §7|");
+                hologram.appendTextLine("§c#5 §7|");
+
+
+
+            }
+        }.runTaskLater(Main.getInstance(), 100L);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                spawnHologram();
+
+
+            }
+        }.runTaskLater(Main.getInstance(), 200L);
     }
 }

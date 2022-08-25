@@ -1,5 +1,6 @@
 package be.shark_zekrom;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -8,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -33,7 +35,7 @@ public class Listeners implements Listener {
                     if (mainHand.getItemMeta().hasDisplayName()) {
                         if (mainHand.getItemMeta().getDisplayName().equals("BattleTrainingPlus")) {
                             event.setCancelled(true);
-                            Punchingball.spawnPunchingball(event.getPlayer(), event.getClickedBlock().getLocation().add(0.5,1,0.5));
+                            Punchingball.spawnPunchingball(event.getClickedBlock().getLocation().add(0.5,1,0.5));
                         }
                     }
 
@@ -47,7 +49,12 @@ public class Listeners implements Listener {
     public void onRightClickEntity(PlayerInteractAtEntityEvent event) {
         if (event.getRightClicked() instanceof ArmorStand armorStand) {
             if (armorStand.getScoreboardTags().contains("Punchingball")) {
-                Menu.Punchingball(event.getPlayer(), armorStand);
+                if (event.getPlayer().isSneaking()) {
+                    Menu.punchingballEditing(event.getPlayer(), armorStand);
+
+                } else {
+                    Menu.punchingball(event.getPlayer(), armorStand);
+                }
             }
 
         }
@@ -63,22 +70,23 @@ public class Listeners implements Listener {
                 Punchingball.animationPunchingball(armorStand);
 
                 if (Punchingball.punchingball.containsKey(player)) {
-                    Punchingball.totalDamage.put(player,  Punchingball.totalDamage.get(player) + event.getDamage());
-                    Punchingball.lastDamage.put(player, event.getDamage());
-                    Punchingball.hits.put(player,  Punchingball.hits.get(player) + 1);
+                    if (Punchingball.punchingball.get(player) == armorStand) {
+                        Punchingball.totalDamage.put(player, Punchingball.totalDamage.get(player) + event.getDamage());
+                        Punchingball.lastDamage.put(player, event.getDamage());
+                        Punchingball.hits.put(player, Punchingball.hits.get(player) + 1);
 
-                    if (event.getDamage() > Punchingball.maxDamage.get(player)) {
-                        Punchingball.maxDamage.put(player, event.getDamage());
-                    }
+                        if (event.getDamage() > Punchingball.maxDamage.get(player)) {
+                            Punchingball.maxDamage.put(player, event.getDamage());
+                        }
 
-                    if (Punchingball.minDamage.get(player) == null) {
-                        Punchingball.minDamage.put(player, event.getDamage());
-                    } else {
-                        if (event.getDamage() < Punchingball.minDamage.get(player)) {
+                        if (Punchingball.minDamage.get(player) == null) {
                             Punchingball.minDamage.put(player, event.getDamage());
+                        } else {
+                            if (event.getDamage() < Punchingball.minDamage.get(player)) {
+                                Punchingball.minDamage.put(player, event.getDamage());
+                            }
                         }
                     }
-
                 } else {
 
                     double number = event.getDamage();
@@ -86,10 +94,10 @@ public class Listeners implements Listener {
 
                     armorStand.setCustomName("-" + format.format(number) + "");
                     armorStand.setCustomNameVisible(true);
-                    if (Punchingball.punchingballhit.containsKey(player)) {
-                        Punchingball.punchingballhit.put(player, Punchingball.punchingballhit.get(player) + 3);
+                    if (Punchingball.punchingballhit.containsKey(armorStand)) {
+                        Punchingball.punchingballhit.put(armorStand, Punchingball.punchingballhit.get(armorStand) + 3);
                     } else {
-                        Punchingball.punchingballhit.put(player, 3);
+                        Punchingball.punchingballhit.put(armorStand, 3);
 
                     }
                     final int[] countdown = {3};
@@ -97,19 +105,15 @@ public class Listeners implements Listener {
                         @Override
                         public void run() {
                             countdown[0]--;
+                            Punchingball.punchingballhit.put(armorStand, Punchingball.punchingballhit.get(armorStand) - 1);
 
-                            Punchingball.punchingballhit.put(player, Punchingball.punchingballhit.get(player) - 1);
-
-                            if (Punchingball.punchingballhit.get(player) == 0) {
+                            if (Punchingball.punchingballhit.get(armorStand) == 0) {
                                 armorStand.setCustomNameVisible(false);
-
                             }
 
                             if (countdown[0] == 0) {
                                 cancel();
                             }
-
-
                         }
                     }.runTaskTimer(Main.getInstance(), 0L, 20L);
                 }
@@ -117,4 +121,12 @@ public class Listeners implements Listener {
         }
     }
 
+    @EventHandler
+    public void playerArmorStandManipulateEvent(PlayerArmorStandManipulateEvent event) {
+
+        ArmorStand armorStand = event.getRightClicked();
+        if (armorStand.getScoreboardTags().contains("Punchingball")) {
+            event.setCancelled(true);
+        }
+    }
 }

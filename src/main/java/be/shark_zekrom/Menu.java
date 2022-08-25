@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,15 +19,14 @@ public class Menu implements Listener {
     public static HashMap<Player, ArmorStand> playerPunchingball = new HashMap<>();
     public static HashMap<ArmorStand, Player> armorstandPunchingball = new HashMap<>();
 
+    public static HashMap<Player, ArmorStand> playereditarmorstand = new HashMap<>();
 
-    public static void Punchingball(Player player, ArmorStand armorStand) {
+    public static void punchingball(Player player, ArmorStand armorStand) {
 
         Inventory inventory = Bukkit.createInventory(null, 54, "Punchingball");
 
         player.openInventory(inventory);
 
-        ItemStack itemStack = new ItemStack(Material.BARRIER);
-        inventory.setItem(49, itemStack);
 
         ItemStack clock15 = new ItemStack(Material.CLOCK);
         ItemMeta clockMeta15 = clock15.getItemMeta();
@@ -63,6 +63,26 @@ public class Menu implements Listener {
         armorstandPunchingball.put(armorStand, player);
 
     }
+
+    public static void punchingballEditing(Player player, ArmorStand armorStand) {
+        Inventory inventory = Bukkit.createInventory(null, 54, "Punchingball Editing");
+
+        player.openInventory(inventory);
+
+        inventory.setItem(13, armorStand.getHelmet());
+        inventory.setItem(22, armorStand.getChestplate());
+        inventory.setItem(31, armorStand.getLeggings());
+        inventory.setItem(40, armorStand.getBoots());
+
+        ItemStack itemStack = new ItemStack(Material.BARRIER);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName("Remove");
+        itemStack.setItemMeta(itemMeta);
+        inventory.setItem(49, itemStack);
+
+        playereditarmorstand.put(player, armorStand);
+    }
+
 
     @EventHandler
     private void onInventoryClick(InventoryClickEvent event) {
@@ -111,13 +131,20 @@ public class Menu implements Listener {
         }
     }
 
-  //  @EventHandler
-    //    private void onInventoryClose(InventoryCloseEvent event) {
-    //        Player player = (Player) event.getPlayer();
-    //
-    //        if (event.getView().getTitle().equalsIgnoreCase("Punchingball")) {
-    //            armorstandPunchingball.remove(playerPunchingball.get(player));
-    //            playerPunchingball.remove(player);
-    //        }
-    //    }
+    @EventHandler
+    private void onInventoryClose(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
+
+        if (event.getView().getTitle().equalsIgnoreCase("Punchingball Editing")) {
+
+            ArmorStand armorStand = playereditarmorstand.get(player);
+
+            armorStand.setHelmet(event.getInventory().getItem(13));
+            armorStand.setChestplate(event.getInventory().getItem(22));
+            armorStand.setLeggings(event.getInventory().getItem(31));
+            armorStand.setBoots(event.getInventory().getItem(40));
+
+            playereditarmorstand.remove(player);
+        }
+    }
 }
