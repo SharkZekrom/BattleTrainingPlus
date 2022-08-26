@@ -4,7 +4,10 @@ import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -77,5 +80,15 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         Bukkit.getLogger().info("BattleTraining+ disabled !");
         //Punchingball.hologram.delete();
+
+        for (World world : Bukkit.getWorlds()) {
+            for (Entity entity : world.getEntities()) {
+                if (entity instanceof ArmorStand armorStand) {
+                    if (armorStand.getScoreboardTags().contains("Punching ball")) {
+                        armorStand.setCustomNameVisible(false);
+                    }
+                }
+            }
+        }
     }
 }
