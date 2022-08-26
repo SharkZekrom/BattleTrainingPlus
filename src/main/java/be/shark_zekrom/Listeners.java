@@ -113,7 +113,10 @@ public class Listeners implements Listener {
                             Punchingball.punchingballhit.put(armorStand, Punchingball.punchingballhit.get(armorStand) - 1);
 
                             if (Punchingball.punchingballhit.get(armorStand) == 0) {
-                                armorStand.setCustomNameVisible(false);
+                                if (!Punchingball.punchingball.containsValue(armorStand)) {
+
+                                    armorStand.setCustomNameVisible(false);
+                                }
                             }
 
                             if (countdown[0] == 0) {
