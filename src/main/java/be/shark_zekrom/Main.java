@@ -8,6 +8,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main extends JavaPlugin {
 
     private static Main instance;
@@ -47,14 +50,20 @@ public class Main extends JavaPlugin {
         config.addDefault("Punchingball90seconds", "90 seconds");
         config.addDefault("Punchingball120seconds", "120 seconds");
         config.addDefault("PunchingballRemove", "&cRemove");
-        config.addDefault("PunchingballChatTotalTime", "§eTotal time > {TotalTime}");
-        config.addDefault("PunchingballChatTotalDamage", "§eTotal damage > {TotalDamage}");
-        config.addDefault("PunchingballChatMaxDamage", "§eMax damage > {MaxDamage}");
-        config.addDefault("PunchingballChatMinDamage", "§eMin damage > {MinDamage}");
-        config.addDefault("PunchingballChatDamagePerSeconds", "§eDamage per seconds > {DamagePerSeconds}");
-        config.addDefault("PunchingballChatAverageDamage", "§eAverage damage > {AverageDamage}");
-        config.addDefault("PunchingballChatHits", "§eHits > {Hits}");
         config.addDefault("PunchingballCountdown", "§c{Damage} | {Countdown}");
+
+        config.addDefault("PunchingballChatScore", List.of(new String[]{
+                "§b=====[BattleTrainingPlus]=====",
+                " ",
+                "§6Total time §7» §e{TotalTime}",
+                "§6Total damage §7» §e{TotalDamage}",
+                "§6Max damage §7» §e{MaxDamage}",
+                "§6Min damage §7» §e{MinDamage}",
+                "§6Damage per seconds §7» §e{DamagePerSeconds}",
+                "§6Average damage §7» §e{AverageDamage}",
+                "§6Hits §7» §e{Hits}",
+                " "}));
+
 
         config.options().copyDefaults(true);
         saveConfig();

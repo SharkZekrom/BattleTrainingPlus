@@ -104,15 +104,12 @@ public class Punchingball {
                     cancel();
                     armorStand.setCustomNameVisible(false);
 
-                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatTotalTime").replace("{TotalTime}", String.valueOf(time)));
-                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatTotalDamage").replace("{TotalDamage}", format.format(totalDamage.get(player))));
-                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatMaxDamage").replace("{MaxDamage}", format.format(maxDamage.get(player))));
                     minDamage.putIfAbsent(player, 0.0);
-                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatMinDamage").replace("{MinDamage}", format.format(minDamage.get(player))));
-                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatDamagePerSeconds").replace("{DamagePerSeconds}", format.format((totalDamage.get(player)) / time)));
-                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatAverageDamage").replace("{AverageDamage}", format.format(totalDamage.get(player) / (double) hits.get(player))));
-                    player.sendMessage(Main.getInstance().getConfig().getString("PunchingballChatHits").replace("{Hits}", String.valueOf(hits.get(player))));
+                    for (String string : Main.getInstance().getConfig().getStringList("PunchingballChatScore")) {
 
+                       String output = string.replace("{TotalTime}", String.valueOf(time)).replace("{TotalDamage}", format.format(totalDamage.get(player))).replace("{MaxDamage}", format.format(maxDamage.get(player))).replace("{MinDamage}", format.format(minDamage.get(player))).replace("{DamagePerSeconds}", format.format((totalDamage.get(player)) / time)).replace("{AverageDamage}", format.format(totalDamage.get(player) / (double) hits.get(player))).replace("{Hits}", String.valueOf(hits.get(player)));
+                        player.sendMessage(output);
+                    }
                     punchingball.remove(player);
                 }
 
