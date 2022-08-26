@@ -45,6 +45,8 @@ public class Main extends JavaPlugin {
 
         FileConfiguration config = getConfig();
 
+        config.addDefault("PunchingballShowArmorstandNameWhenNotUse", true);
+        config.addDefault("PunchingballArmorstandName", "§6Dummy");
         config.addDefault("PunchingballEditingMenu", "Punching ball editing");
         config.addDefault("PunchingballMenu", "Punching ball");
         config.addDefault("Punchingball15seconds", "§e15 seconds");
@@ -71,7 +73,18 @@ public class Main extends JavaPlugin {
         config.options().copyDefaults(true);
         saveConfig();
 
-
+        if (config.getBoolean("PunchingballShowArmorstandNameWhenNotUse")) {
+            for (World world : Bukkit.getWorlds()) {
+                for (Entity entity : world.getEntities()) {
+                    if (entity instanceof ArmorStand armorStand) {
+                        if (armorStand.getScoreboardTags().contains("Punching ball")) {
+                            armorStand.setCustomName(config.getString("PunchingballArmorstandName"));
+                            armorStand.setCustomNameVisible(true);
+                        }
+                    }
+                }
+            }
+        }
         Bukkit.getLogger().info("BattleTraining+ enabled !");
 
     }

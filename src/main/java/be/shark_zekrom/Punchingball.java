@@ -3,10 +3,7 @@ package be.shark_zekrom;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.line.HologramLine;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -83,36 +80,66 @@ public class Punchingball {
     }
 
     public static void startPunchingball(Player player,ArmorStand armorStand , Integer time) {
-
         punchingball.put(player,armorStand);
-        totalDamage.put(player,0.0);
-        lastDamage.put(player, 0.0);
-        maxDamage.put(player, 0.0);
-        hits.put(player,0);
-        double number = lastDamage.get(player);
-        DecimalFormat format = new DecimalFormat("0.00");
-        armorStand.setCustomName("§c"+ format.format(number) + " | " + time);
-        armorStand.setCustomNameVisible(true);
-        final int[] countdown = {time};
+
+
+        final int[] countdown = {3};
         new BukkitRunnable() {
             @Override
             public void run() {
-                double number = lastDamage.get(player);
-                armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballCountdown").replace("{Damage}", format.format(number)).replace("{Countdown}",String.valueOf(countdown[0])));
-
+                armorStand.setCustomName("§c" + countdown[0]);
                 if (countdown[0] == 0) {
                     cancel();
-                    armorStand.setCustomNameVisible(false);
 
-                    minDamage.putIfAbsent(player, 0.0);
-                    for (String string : Main.getInstance().getConfig().getStringList("PunchingballChatScore")) {
 
-                       String output = string.replace("{TotalTime}", String.valueOf(time)).replace("{TotalDamage}", format.format(totalDamage.get(player))).replace("{MaxDamage}", format.format(maxDamage.get(player))).replace("{MinDamage}", format.format(minDamage.get(player))).replace("{DamagePerSeconds}", format.format((totalDamage.get(player)) / time)).replace("{AverageDamage}", format.format(totalDamage.get(player) / (double) hits.get(player))).replace("{Hits}", String.valueOf(hits.get(player)));
-                        player.sendMessage(output);
-                    }
-                    punchingball.remove(player);
+                    totalDamage.put(player,0.0);
+                    lastDamage.put(player, 0.0);
+                    maxDamage.put(player, 0.0);
+                    hits.put(player,0);
+                    double number = lastDamage.get(player);
+                    DecimalFormat format = new DecimalFormat("0.00");
+                    armorStand.setCustomName("§c"+ format.format(number) + " | " + time);
+                    armorStand.setCustomNameVisible(true);
+                    final int[] newtime = {time};
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            double number = lastDamage.get(player);
+                            armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballCountdown").replace("{Damage}", format.format(number)).replace("{Countdown}",String.valueOf(newtime[0])));
+
+                            if (newtime[0] == 0) {
+                                cancel();
+
+                                if (Main.getInstance().getConfig().getBoolean("PunchingballShowArmorstandNameWhenNotUse")) {
+                                    for (World world : Bukkit.getWorlds()) {
+                                        for (Entity entity : world.getEntities()) {
+                                            if (entity instanceof ArmorStand armorStand) {
+                                                if (armorStand.getScoreboardTags().contains("Punching ball")) {
+                                                    armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballArmorstandName"));
+                                                    armorStand.setCustomNameVisible(true);
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    armorStand.setCustomNameVisible(false);
+                                }
+
+
+
+                                minDamage.putIfAbsent(player, 0.0);
+                                for (String string : Main.getInstance().getConfig().getStringList("PunchingballChatScore")) {
+
+                                    String output = string.replace("{TotalTime}", String.valueOf(time)).replace("{TotalDamage}", format.format(totalDamage.get(player))).replace("{MaxDamage}", format.format(maxDamage.get(player))).replace("{MinDamage}", format.format(minDamage.get(player))).replace("{DamagePerSeconds}", format.format((totalDamage.get(player)) / time)).replace("{AverageDamage}", format.format(totalDamage.get(player) / (double) hits.get(player))).replace("{Hits}", String.valueOf(hits.get(player)));
+                                    player.sendMessage(output);
+                                }
+                                punchingball.remove(player);
+                            }
+
+                            newtime[0]--;
+                        }
+                    }.runTaskTimer(Main.getInstance(),0L, 20L);
                 }
-
                 countdown[0]--;
             }
         }.runTaskTimer(Main.getInstance(),0L, 20L);

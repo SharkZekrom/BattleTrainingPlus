@@ -2,7 +2,9 @@ package be.shark_zekrom;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -115,7 +117,20 @@ public class Listeners implements Listener {
                                 if (Punchingball.punchingballhit.get(armorStand) == 0) {
                                     if (!Punchingball.punchingball.containsValue(armorStand)) {
 
-                                        armorStand.setCustomNameVisible(false);
+                                        if (Main.getInstance().getConfig().getBoolean("PunchingballShowArmorstandNameWhenNotUse")) {
+                                            for (World world : Bukkit.getWorlds()) {
+                                                for (Entity entity : world.getEntities()) {
+                                                    if (entity instanceof ArmorStand armorStand) {
+                                                        if (armorStand.getScoreboardTags().contains("Punching ball")) {
+                                                            armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballArmorstandName"));
+                                                            armorStand.setCustomNameVisible(true);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            armorStand.setCustomNameVisible(false);
+                                        }
                                     }
                                 }
 
