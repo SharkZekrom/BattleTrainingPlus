@@ -8,6 +8,7 @@ import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -39,42 +40,45 @@ public class Punchingball {
 
         ItemStack itemStack = new ItemStack(Material.ARMOR_STAND);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName("Punching ball");
+        itemMeta.setDisplayName("§fPunching ball");
         itemStack.setItemMeta(itemMeta);
 
         player.getInventory().addItem(itemStack);
     }
 
     public static void spawnPunchingball(Player player,Location location) {
-        location.getBlock().setType(Material.OAK_FENCE);
-        if (Utils.getDirection(player).equals("N") || Utils.getDirection(player).equals("NE")) {
-            location.setYaw(270);
-        } else if (Utils.getDirection(player).equals("E") || Utils.getDirection(player).equals("SE")) {
-            location.setYaw(0);
 
-        } else if (Utils.getDirection(player).equals("S") || Utils.getDirection(player).equals("SW")) {
-            location.setYaw(90);
+        if (location.getWorld().getNearbyEntities(location,0.5,0.5,0.5).isEmpty()) {
 
-        } else if (Utils.getDirection(player).equals("W") || Utils.getDirection(player).equals("NW")) {
-            location.setYaw(180);
+            location.getBlock().setType(Material.OAK_FENCE);
+            if (Utils.getDirection(player).equals("N") || Utils.getDirection(player).equals("NE")) {
+                location.setYaw(270);
+            } else if (Utils.getDirection(player).equals("E") || Utils.getDirection(player).equals("SE")) {
+                location.setYaw(0);
 
+            } else if (Utils.getDirection(player).equals("S") || Utils.getDirection(player).equals("SW")) {
+                location.setYaw(90);
+
+            } else if (Utils.getDirection(player).equals("W") || Utils.getDirection(player).equals("NW")) {
+                location.setYaw(180);
+
+            }
+
+            ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
+            armorStand.setCanPickupItems(false);
+            armorStand.setGravity(false);
+            armorStand.setVisible(false);
+            armorStand.addScoreboardTag("Punching ball");
+
+            armorStand.setHelmet(new ItemStack(Material.HAY_BLOCK));
+
+            ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+            ItemMeta chestplateMeta = chestplate.hasItemMeta() ? chestplate.getItemMeta() : Bukkit.getItemFactory().getItemMeta(chestplate.getType());
+            LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) chestplateMeta;
+            leatherArmorMeta.setColor(Color.fromRGB(254, 216, 61));
+            chestplate.setItemMeta(leatherArmorMeta);
+            armorStand.setChestplate(chestplate);
         }
-
-        ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
-        armorStand.setCanPickupItems(false);
-        armorStand.setGravity(false);
-        armorStand.setVisible(false);
-        armorStand.addScoreboardTag("Punching ball");
-
-        armorStand.setHelmet(new ItemStack(Material.HAY_BLOCK));
-
-        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
-        ItemMeta chestplateMeta = chestplate.hasItemMeta() ? chestplate.getItemMeta() : Bukkit.getItemFactory().getItemMeta(chestplate.getType());
-        LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) chestplateMeta;
-        leatherArmorMeta.setColor(Color.fromRGB(254, 216, 61));
-        chestplate.setItemMeta(leatherArmorMeta);
-        armorStand.setChestplate(chestplate);
-
 
     }
 
@@ -94,7 +98,7 @@ public class Punchingball {
             @Override
             public void run() {
                 double number = lastDamage.get(player);
-                armorStand.setCustomName("§c"+ format.format(number) + " | " + (countdown[0]));
+                armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballCountdown").replace("{Damage}", format.format(number)).replace("{Countdown}",String.valueOf(countdown[0])));
 
                 if (countdown[0] == 0) {
                     cancel();

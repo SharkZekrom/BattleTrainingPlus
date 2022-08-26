@@ -54,6 +54,7 @@ public class Main extends JavaPlugin {
         config.addDefault("PunchingballChatDamagePerSeconds", "§eDamage per seconds > {DamagePerSeconds}");
         config.addDefault("PunchingballChatAverageDamage", "§eAverage damage > {AverageDamage}");
         config.addDefault("PunchingballChatHits", "§eHits > {Hits}");
+        config.addDefault("PunchingballCountdown", "§c{Damage} | {Countdown}");
 
         config.options().copyDefaults(true);
         saveConfig();

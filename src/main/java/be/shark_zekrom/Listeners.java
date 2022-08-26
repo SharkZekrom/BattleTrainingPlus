@@ -33,9 +33,11 @@ public class Listeners implements Listener {
             if (mainHand.getType() == Material.ARMOR_STAND ) {
                 if (mainHand.hasItemMeta()) {
                     if (mainHand.getItemMeta().hasDisplayName()) {
-                        if (mainHand.getItemMeta().getDisplayName().equals("BattleTrainingPlus")) {
-                            event.setCancelled(true);
-                            Punchingball.spawnPunchingball(event.getPlayer(), event.getClickedBlock().getLocation().add(0.5,1,0.5));
+                        if (mainHand.getItemMeta().getDisplayName().equals("§fPunching ball")) {
+                            if (event.getPlayer().hasPermission("BattleTraining+.spawn.punchingball")) {
+                                event.setCancelled(true);
+                                Punchingball.spawnPunchingball(event.getPlayer(), event.getClickedBlock().getLocation().add(0.5, 1, 0.5));
+                            }
                         }
                     }
 
