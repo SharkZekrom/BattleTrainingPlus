@@ -25,8 +25,13 @@ public class Commands implements CommandExecutor, TabExecutor {
                     }
                 }
             }
-        }
+            if (args[0].equalsIgnoreCase("reload")) {
+                if (player.hasPermission("BattleTraining+.reload")) {
+                    Main.punchingballShowArmorstandNameWhenNotUse = Main.getInstance().getConfig().getBoolean("PunchingballShowArmorstandNameWhenNotUse");
 
+                }
+            }
+        }
         return false;
 
     }

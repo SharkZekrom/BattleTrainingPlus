@@ -22,6 +22,8 @@ public class Main extends JavaPlugin {
         return instance;
     }
     //public boolean useHolographicDisplays;
+    public static boolean punchingballShowArmorstandNameWhenNotUse;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -56,6 +58,7 @@ public class Main extends JavaPlugin {
         config.addDefault("Punchingball120seconds", "§e120 seconds");
         config.addDefault("PunchingballRemove", "&cRemove");
         config.addDefault("PunchingballCountdown", "§c{Damage} | {Countdown}");
+        config.addDefault("BattleTrainingReload", "§bSuccessfully reloaded!");
 
         config.addDefault("PunchingballChatScore", List.of(new String[]{
                 "§b=====[BattleTrainingPlus]=====",
@@ -85,6 +88,7 @@ public class Main extends JavaPlugin {
                 }
             }
         }
+        punchingballShowArmorstandNameWhenNotUse = config.getBoolean("PunchingballShowArmorstandNameWhenNotUse");
         Bukkit.getLogger().info("BattleTraining+ enabled !");
 
     }
