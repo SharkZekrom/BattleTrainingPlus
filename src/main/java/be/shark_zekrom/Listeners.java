@@ -93,37 +93,38 @@ public class Listeners implements Listener {
                         }
                     }
                 } else {
+                    if (!Punchingball.punchingball.containsValue(armorStand)) {
+                        double number = event.getDamage();
+                        DecimalFormat format = new DecimalFormat("0.00");
 
-                    double number = event.getDamage();
-                    DecimalFormat format = new DecimalFormat("0.00");
+                        armorStand.setCustomName("§e-" + format.format(number) + "");
+                        armorStand.setCustomNameVisible(true);
+                        if (Punchingball.punchingballhit.containsKey(armorStand)) {
+                            Punchingball.punchingballhit.put(armorStand, Punchingball.punchingballhit.get(armorStand) + 3);
+                        } else {
+                            Punchingball.punchingballhit.put(armorStand, 3);
 
-                    armorStand.setCustomName("§e-" + format.format(number) + "");
-                    armorStand.setCustomNameVisible(true);
-                    if (Punchingball.punchingballhit.containsKey(armorStand)) {
-                        Punchingball.punchingballhit.put(armorStand, Punchingball.punchingballhit.get(armorStand) + 3);
-                    } else {
-                        Punchingball.punchingballhit.put(armorStand, 3);
+                        }
+                        final int[] countdown = {3};
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                countdown[0]--;
+                                Punchingball.punchingballhit.put(armorStand, Punchingball.punchingballhit.get(armorStand) - 1);
 
-                    }
-                    final int[] countdown = {3};
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            countdown[0]--;
-                            Punchingball.punchingballhit.put(armorStand, Punchingball.punchingballhit.get(armorStand) - 1);
+                                if (Punchingball.punchingballhit.get(armorStand) == 0) {
+                                    if (!Punchingball.punchingball.containsValue(armorStand)) {
 
-                            if (Punchingball.punchingballhit.get(armorStand) == 0) {
-                                if (!Punchingball.punchingball.containsValue(armorStand)) {
+                                        armorStand.setCustomNameVisible(false);
+                                    }
+                                }
 
-                                    armorStand.setCustomNameVisible(false);
+                                if (countdown[0] == 0) {
+                                    cancel();
                                 }
                             }
-
-                            if (countdown[0] == 0) {
-                                cancel();
-                            }
-                        }
-                    }.runTaskTimer(Main.getInstance(), 0L, 20L);
+                        }.runTaskTimer(Main.getInstance(), 0L, 20L);
+                    }
                 }
             }
         }
