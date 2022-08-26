@@ -47,11 +47,11 @@ public class Main extends JavaPlugin {
 
         config.addDefault("PunchingballEditingMenu", "Punching ball editing");
         config.addDefault("PunchingballMenu", "Punching ball");
-        config.addDefault("Punchingball15seconds", "15 seconds");
-        config.addDefault("Punchingball30seconds", "30 seconds");
-        config.addDefault("Punchingball60seconds", "60 seconds");
-        config.addDefault("Punchingball90seconds", "90 seconds");
-        config.addDefault("Punchingball120seconds", "120 seconds");
+        config.addDefault("Punchingball15seconds", "§e15 seconds");
+        config.addDefault("Punchingball30seconds", "§e30 seconds");
+        config.addDefault("Punchingball60seconds", "§e60 seconds");
+        config.addDefault("Punchingball90seconds", "§e90 seconds");
+        config.addDefault("Punchingball120seconds", "§e120 seconds");
         config.addDefault("PunchingballRemove", "&cRemove");
         config.addDefault("PunchingballCountdown", "§c{Damage} | {Countdown}");
 
