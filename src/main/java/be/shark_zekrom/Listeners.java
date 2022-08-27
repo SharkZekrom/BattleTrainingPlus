@@ -118,16 +118,10 @@ public class Listeners implements Listener {
                                     if (!Punchingball.punchingball.containsValue(armorStand)) {
 
                                         if (Main.getInstance().getConfig().getBoolean("PunchingballShowArmorstandNameWhenNotUse")) {
-                                            for (World world : Bukkit.getWorlds()) {
-                                                for (Entity entity : world.getEntities()) {
-                                                    if (entity instanceof ArmorStand armorStand) {
-                                                        if (armorStand.getScoreboardTags().contains("Punching ball")) {
-                                                            armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballArmorstandName"));
-                                                            armorStand.setCustomNameVisible(true);
-                                                        }
-                                                    }
-                                                }
-                                            }
+
+                                            armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballArmorstandName"));
+                                            armorStand.setCustomNameVisible(true);
+
                                         } else {
                                             armorStand.setCustomNameVisible(false);
                                         }
