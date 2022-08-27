@@ -80,7 +80,7 @@ public class Punchingball {
     }
 
     public static void startPunchingball(Player player,ArmorStand armorStand , Integer time) {
-        punchingball.put(player,armorStand);
+        punchingball.put(player, armorStand);
 
 
         final int[] countdown = {3};
@@ -92,39 +92,31 @@ public class Punchingball {
                     cancel();
 
 
-                    totalDamage.put(player,0.0);
+                    totalDamage.put(player, 0.0);
                     lastDamage.put(player, 0.0);
                     maxDamage.put(player, 0.0);
-                    hits.put(player,0);
+                    hits.put(player, 0);
                     double number = lastDamage.get(player);
                     DecimalFormat format = new DecimalFormat("0.00");
-                    armorStand.setCustomName("§c"+ format.format(number) + " | " + time);
+                    armorStand.setCustomName("§c" + format.format(number) + " | " + time);
                     armorStand.setCustomNameVisible(true);
                     final int[] newtime = {time};
                     new BukkitRunnable() {
                         @Override
                         public void run() {
                             double number = lastDamage.get(player);
-                            armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballCountdown").replace("{Damage}", format.format(number)).replace("{Countdown}",String.valueOf(newtime[0])));
+                            armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballCountdown").replace("{Damage}", format.format(number)).replace("{Countdown}", String.valueOf(newtime[0])));
 
                             if (newtime[0] == 0) {
                                 cancel();
 
                                 if (Main.getInstance().getConfig().getBoolean("PunchingballShowArmorstandNameWhenNotUse")) {
-                                    for (World world : Bukkit.getWorlds()) {
-                                        for (Entity entity : world.getEntities()) {
-                                            if (entity instanceof ArmorStand armorStand) {
-                                                if (armorStand.getScoreboardTags().contains("Punching ball")) {
-                                                    armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballArmorstandName"));
-                                                    armorStand.setCustomNameVisible(true);
-                                                }
-                                            }
-                                        }
-                                    }
+                                    armorStand.setCustomName(Main.getInstance().getConfig().getString("PunchingballArmorstandName"));
+                                    armorStand.setCustomNameVisible(true);
+
                                 } else {
                                     armorStand.setCustomNameVisible(false);
                                 }
-
 
 
                                 minDamage.putIfAbsent(player, 0.0);
@@ -138,11 +130,11 @@ public class Punchingball {
 
                             newtime[0]--;
                         }
-                    }.runTaskTimer(Main.getInstance(),0L, 20L);
+                    }.runTaskTimer(Main.getInstance(), 0L, 20L);
                 }
                 countdown[0]--;
             }
-        }.runTaskTimer(Main.getInstance(),0L, 20L);
+        }.runTaskTimer(Main.getInstance(), 0L, 20L);
 
     }
 
