@@ -71,8 +71,8 @@ public class Menu implements Listener {
         player.openInventory(inventory);
         Utils.border(inventory);
 
-        inventory.setItem(13, armorStand.getHelmet());
-        inventory.setItem(22, armorStand.getChestplate());
+        inventory.setItem(22, armorStand.getHelmet());
+        inventory.setItem(31, armorStand.getChestplate());
 
         ItemStack itemStack = new ItemStack(Material.BARRIER);
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -94,7 +94,7 @@ public class Menu implements Listener {
         if (event.getView().getTitle().equalsIgnoreCase(Main.getInstance().getConfig().getString("PunchingballEditingMenu"))) {
             if (event.getClickedInventory().getType() != InventoryType.PLAYER) {
 
-                if (!(slot == 13 || slot == 22)) {
+                if (!(slot == 22 || slot == 31)) {
                     event.setCancelled(true);
                 }
 
@@ -145,11 +145,8 @@ public class Menu implements Listener {
 
             ArmorStand armorStand = playereditarmorstand.get(player);
 
-            armorStand.setHelmet(event.getInventory().getItem(13));
-            armorStand.setChestplate(event.getInventory().getItem(22));
-            armorStand.setLeggings(event.getInventory().getItem(31));
-            armorStand.setBoots(event.getInventory().getItem(40));
-
+            armorStand.setHelmet(event.getInventory().getItem(22));
+            armorStand.setChestplate(event.getInventory().getItem(31));
             playereditarmorstand.remove(player);
         }
     }
