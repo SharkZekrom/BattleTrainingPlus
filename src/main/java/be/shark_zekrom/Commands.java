@@ -33,7 +33,6 @@ public class Commands implements CommandExecutor, TabExecutor {
                     }
 
                     Main.punchingballShowArmorstandNameWhenNotUse = Main.getInstance().getConfig().getBoolean("PunchingballShowArmorstandNameWhenNotUse");
-                    Bukkit.broadcastMessage( Main.punchingballShowArmorstandNameWhenNotUse + "");
                     if (Main.punchingballShowArmorstandNameWhenNotUse) {
                         for (World world : Bukkit.getWorlds()) {
                             for (Entity entity : world.getEntities()) {
@@ -57,6 +56,8 @@ public class Commands implements CommandExecutor, TabExecutor {
                             }
                         }
                     }
+
+                    player.sendMessage(Main.getInstance().getConfig().getString("BattleTrainingReload"));
                 }
             }
         }
@@ -80,6 +81,8 @@ public class Commands implements CommandExecutor, TabExecutor {
         List<String> arguments = new ArrayList<>();
         if (args.length == 1) {
             arguments.add("give");
+            arguments.add("reload");
+
         }
         if (args[0].equals("give")) {
             arguments.add("punchingball");

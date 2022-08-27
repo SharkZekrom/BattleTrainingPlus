@@ -58,7 +58,7 @@ public class Main extends JavaPlugin {
         config.addDefault("Punchingball120seconds", "§e120 seconds");
         config.addDefault("PunchingballRemove", "&cRemove");
         config.addDefault("PunchingballCountdown", "§c{Damage} | {Countdown}");
-        config.addDefault("BattleTrainingReload", "§bSuccessfully reloaded!");
+        config.addDefault("BattleTrainingReload", "§b[BattleTrainingPlus] Successfully reloaded!");
 
         config.addDefault("PunchingballChatScore", List.of(new String[]{
                 "§b=====[BattleTrainingPlus]=====",
