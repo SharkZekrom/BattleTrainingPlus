@@ -21,23 +21,12 @@ public class Main extends JavaPlugin {
     public static Main getInstance() {
         return instance;
     }
-    //public boolean useHolographicDisplays;
     public static boolean punchingballShowArmorstandNameWhenNotUse;
 
     @Override
     public void onEnable() {
         instance = this;
         PluginManager pm = getServer().getPluginManager();
-
-        // if (Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
-        //    useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
-        //    Punchingball.hologram = HologramsAPI.createHologram(Main.getInstance(), new Location(Bukkit.getWorld("world2"),0,91,0));
-        //    Punchingball.spawnHologram();
-
-        //} else {
-        //    getLogger().severe("*** HolographicDisplays is not installed or not enabled. You can't use leaderboard ***");
-
-        // }
 
         pm.registerEvents(new Listeners(), this);
         pm.registerEvents(new Menu(), this);
@@ -96,7 +85,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         Bukkit.getLogger().info("BattleTraining+ disabled !");
-        //Punchingball.hologram.delete();
 
         for (World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {
