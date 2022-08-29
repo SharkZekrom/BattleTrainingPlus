@@ -1,9 +1,6 @@
 package be.shark_zekrom;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -11,7 +8,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends JavaPlugin {
@@ -30,6 +26,7 @@ public class Main extends JavaPlugin {
 
         pm.registerEvents(new Listeners(), this);
         pm.registerEvents(new Menu(), this);
+        pm.registerEvents(new Punchingball(), this);
 
         this.getCommand("BattleTraining+").setExecutor(new Commands());
 
